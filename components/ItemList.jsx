@@ -30,50 +30,41 @@ const ItemList = () => {
     }
   });
 
-  console.log('test items', testItems);
-
-  //   const reorder = (list, startIndex, endIndex) => {
-  //     const [removed] = list?.splice(startIndex, 1);
-  //     console.log(removed);
-
-  //     list?.splice(endIndex, 0, removed);
-  //     return list;
-  //   };
-
-  //   console.log(reorder());
-
   const onDragStart = (event) => {
     const { draggableId } = event;
     console.log('start', event);
     setActiveItem(draggableId);
   };
 
-  const onDragEnd = (event) => {
-    const { destination, source } = event;
-    if (!destination) {
-      return;
-    }
+  const onDragEnd = useCallback(
+    (event) => {
+      const { destination, source } = event;
+      if (!destination) {
+        return;
+      }
 
-    if (source.droppableId === 'blocks') {
-      console.log('item info', itemInfo);
+      if (source.droppableId === 'blocks') {
+        console.log('item info', itemInfo);
 
-      itemInfo &&
+        itemInfo &&
+          dispatch(
+            addItem({
+              id: uuid(),
+              type: itemInfo?.id,
+            })
+          );
+      } else {
         dispatch(
-          addItem({
-            id: uuid(),
-            type: itemInfo?.id,
+          orderItems({
+            startIndex: source.index,
+            endIndex: destination.index,
           })
         );
-    } else {
-      dispatch(
-        orderItems({
-          startIndex: source.index,
-          endIndex: destination.index,
-        })
-      );
-      //   reorder(testItems, source.index, destination.index);
-    }
-  };
+        //   reorder(testItems, source.index, destination.index);
+      }
+    },
+    [itemInfo]
+  );
 
   return (
     <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>

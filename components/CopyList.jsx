@@ -8,42 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBlocks } from '../features/itemSlice';
 
 const CopyList = () => {
-  //   const [items, setItems] = useState(null);
-  //   const dispatch = useDispatch();
-
   const items = useSelector((state) => state.items.blockItems);
-
-  //   useEffect(() => {
-  //     const testing = () => {
-  //       if (typeof window !== 'undefined') {
-  //         const test = [
-  //           {
-  //             id: uuid(),
-  //             content: 'Heading',
-  //             type: 'heading',
-  //           },
-  //           {
-  //             id: uuid(),
-  //             content: 'Block',
-  //             type: 'block',
-  //           },
-  //           {
-  //             id: uuid(),
-  //             content: 'Text',
-  //             type: 'text',
-  //           },
-  //           {
-  //             id: uuid(),
-  //             content: 'Image',
-  //             type: 'image',
-  //           },
-  //         ];
-  //         return test;
-  //       }
-  //     };
-  //     setItems(testing);
-  //     dispatch(addBlocks(items));
-  //   }, []);
 
   return (
     <Droppable
@@ -81,3 +46,35 @@ const CopyList = () => {
 };
 
 export default CopyList;
+
+//   useEffect(() => {
+//     const testing = () => {
+//       if (typeof window !== 'undefined') {
+//         const test = [
+//           {
+//             id: uuid(),
+//             content: 'Heading',
+//             type: 'heading',
+//           },
+//           {
+//             id: uuid(),
+//             content: 'Block',
+//             type: 'block',
+//           },
+//           {
+//             id: uuid(),
+//             content: 'Text',
+//             type: 'text',
+//           },
+//           {
+//             id: uuid(),
+//             content: 'Image',
+//             type: 'image',
+//           },
+//         ];
+//         return test;
+//       }
+//     };
+//     setItems(testing);
+//     dispatch(addBlocks(items));
+//   }, []);
